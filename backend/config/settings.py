@@ -1,12 +1,12 @@
 from pathlib import Path
 
-import environ
+from environ import Env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = environ.Env(DEBUG=(bool, False))
+env = Env(DEBUG=(bool, False))
 
-environ.Env.read_env()
+Env.read_env()
 
 SECRET_KEY = "django-insecure-q8u869lwn66$b%#_$^@b-jcm$%#f*hn0js8d*k3-lcs!$-7!ys"
 
@@ -24,11 +24,17 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Third party apps
     "django_extensions",
+    "debug_toolbar",
+    "nplusone.ext.django",
+    # Local apps
     "apps.users",
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "nplusone.ext.django.NPlusOneMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -111,3 +117,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 AUTH_USER_MODEL = "users.User"
+
+INTERNAL_IPS = env.list("INTERNAL_IPS", default=["127.0.0.1"])

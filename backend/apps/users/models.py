@@ -6,8 +6,8 @@ from django.utils.translation import gettext_lazy as _
 class User(AbstractUser):
     """A custom user model"""
 
-    first_name = None
-    last_name = None
+    first_name = None  # type: ignore
+    last_name = None  # type: ignore
     full_name = models.CharField(_("full name"), max_length=200)
     short_name = models.CharField(_("short name"), max_length=50, blank=True, null=True)
     bio = models.TextField(_("Bio"), blank=True, null=True)
@@ -31,7 +31,7 @@ class User(AbstractUser):
     birth_date = models.DateField(_("Birth Date"), null=True, blank=True)
 
     def get_full_name(self) -> str:
-        return self.full_name
+        return self.full_name or ""
 
     def get_short_name(self) -> str:
-        return self.short_name
+        return self.short_name or ""
