@@ -139,3 +139,7 @@ cython_debug/
 
 # media
 uploads
+
+
+# postgres data
+data/db
