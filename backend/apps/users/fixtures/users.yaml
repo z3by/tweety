@@ -1,0 +1,42 @@
+- model: users.User
+  pk: 1
+  fields:
+    full_name: Tweety Admin
+    short_name: admin
+    username: admin
+    password: "pbkdf2_sha256$260000$2KFALyNsSJQMsZNLhnLaRF$5vhQiow+DTt2qsaBqQQuO3RsM1heOjmlcttYw1MNXHA="
+    is_active: true
+    is_staff: true
+    is_superuser: true
+- model: users.User
+  pk: 2
+  fields:
+    full_name: Tiffany Serrano
+    short_name: Tiffany
+    username: tiffany
+    password: "pbkdf2_sha256$260000$2KFALyNsSJQMsZNLhnLaRF$5vhQiow+DTt2qsaBqQQuO3RsM1heOjmlcttYw1MNXHA="
+    is_active: true
+- model: users.User
+  pk: 3
+  fields:
+    full_name: Mr. Benjamin Smith
+    short_name: Benjamin
+    username: benjamin
+    password: "pbkdf2_sha256$260000$2KFALyNsSJQMsZNLhnLaRF$5vhQiow+DTt2qsaBqQQuO3RsM1heOjmlcttYw1MNXHA="
+    is_active: true
+- model: users.User
+  pk: 4
+  fields:
+    full_name: Nicholas Williams
+    short_name: Nicholas
+    username: nicholas
+    password: "pbkdf2_sha256$260000$2KFALyNsSJQMsZNLhnLaRF$5vhQiow+DTt2qsaBqQQuO3RsM1heOjmlcttYw1MNXHA="
+    is_active: true
+- model: users.User
+  pk: 5
+  fields:
+    full_name: Evan Hicks
+    short_name: Evan
+    username: evan
+    password: "pbkdf2_sha256$260000$2KFALyNsSJQMsZNLhnLaRF$5vhQiow+DTt2qsaBqQQuO3RsM1heOjmlcttYw1MNXHA="
+    is_active: true
