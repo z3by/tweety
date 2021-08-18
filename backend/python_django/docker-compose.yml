@@ -33,7 +33,7 @@ services:
     build:
       context: .
       dockerfile: docker/django/Dockerfile
-    command: python manage.py runserver_plus 0.0.0.0:8000
+    command: /code/docker/django/start
     env_file: .env
     volumes:
       - .:/code
