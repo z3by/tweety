@@ -143,3 +143,5 @@ uploads
 
 # postgres data
 data/db
+
+.python-version
