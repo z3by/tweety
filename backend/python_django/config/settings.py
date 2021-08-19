@@ -1,3 +1,7 @@
+"""Django settings module.
+
+for all available Django settings refer to https://docs.djangoproject.com/en/3.2/ref/settings/
+"""
 from pathlib import Path
 
 from environ import Env
@@ -8,7 +12,10 @@ env = Env(DEBUG=(bool, False))
 
 Env.read_env()
 
-SECRET_KEY = "django-insecure-q8u869lwn66$b%#_$^@b-jcm$%#f*hn0js8d*k3-lcs!$-7!ys"
+SECRET_KEY = env.str(
+    "SECRET_KEY",
+    default="insecure-q8u869lwn66$b%#_$^@b-jcm$%#f*hn0js8d*k3-lcs!$-7!ys",
+)
 
 DEBUG = env("DEBUG")
 
@@ -118,4 +125,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
-INTERNAL_IPS = env.list("INTERNAL_IPS", default=["127.0.0.1", "0.0.0.0"])
+INTERNAL_IPS = env.list("INTERNAL_IPS", default=["127.0.0.1"])
