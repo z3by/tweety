@@ -13,7 +13,6 @@ ENV DJANGO_ENV=${DJANGO_ENV} \
   PIP_DISABLE_PIP_VERSION_CHECK=on \
   PIP_DEFAULT_TIMEOUT=100 \
   # poetry:
-  POETRY_VERSION=1.1.7 \
   POETRY_VIRTUALENVS_CREATE=false \
   POETRY_CACHE_DIR='/var/cache/pypoetry'
 
@@ -28,14 +27,14 @@ RUN apt-get update \
     libpq-dev \
     wget \
   # Cleaning cache:
-  && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* \
-  && pip install "poetry==$POETRY_VERSION" && poetry --version
+  && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # set work directory
 WORKDIR /code
-COPY pyproject.toml poetry.lock /code/
+COPY pyproject.toml poetry.lock requirements.txt /code/
 
 # Install dependencies:
+RUN pip install -r requirements.txt
 RUN poetry install
 # copy project
 COPY . .

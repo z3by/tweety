@@ -3,21 +3,15 @@ version: "3.9"
 services:
   db:
     image: postgres
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
     volumes:
       - postgres:/data/postgres
     networks:
       - tweety
+    env_file: .env.dev
     restart: unless-stopped
 
   pgadmin:
     image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: pwdpwd
     networks:
       - tweety
     volumes:
@@ -28,8 +22,9 @@ services:
       - db
     depends_on:
       - db
+    env_file: .env.dev
 
-  web:
+  django:
     build:
       context: .
       dockerfile: docker/django/Dockerfile
