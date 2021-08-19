@@ -34,7 +34,7 @@ services:
       context: .
       dockerfile: docker/django/Dockerfile
     command: /code/docker/django/start
-    env_file: .env
+    env_file: .env.dev
     volumes:
       - .:/code
     ports:
