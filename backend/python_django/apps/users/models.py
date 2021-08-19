@@ -1,10 +1,12 @@
+"""Django user models."""
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
-    """A custom user model"""
+    """A custom user model."""
 
     first_name = None  # type: ignore
     last_name = None  # type: ignore
@@ -31,7 +33,21 @@ class User(AbstractUser):
     birth_date = models.DateField(_("Birth Date"), null=True, blank=True)
 
     def get_full_name(self) -> str:
+        """Get the full name of the user.
+
+        Returns
+        -------
+        str
+            the full name of the user
+        """
         return self.full_name or ""
 
     def get_short_name(self) -> str:
+        """Get the short name of the user.
+
+        Returns
+        -------
+        str
+            the short name of the user
+        """
         return self.short_name or ""
