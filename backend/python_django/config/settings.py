@@ -1,6 +1,7 @@
 """Django settings module.
 
-for all available Django settings refer to https://docs.djangoproject.com/en/3.2/ref/settings/
+for all available Django settings refer
+to https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from pathlib import Path
 
@@ -8,18 +9,21 @@ from environ import Env
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = Env(DEBUG=(bool, False))
+env = Env()
 
-Env.read_env()
+ENV_FILE = env.str("DJANGO_ENV_FILE", default=".env.dev")
+
+Env.read_env(str(BASE_DIR / ENV_FILE))
+
+DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
 SECRET_KEY = env.str(
-    "SECRET_KEY",
+    "DJANGO_SECRET_KEY",
     default="insecure-q8u869lwn66$b%#_$^@b-jcm$%#f*hn0js8d*k3-lcs!$-7!ys",
 )
 
-DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 
 
 # Application definition
@@ -75,7 +79,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {"default": env.db("DB_URL", default="sqlite:///db.sqlite3")}
+DATABASES = {"default": env.db("DJANGO_DB_URL", default="sqlite:///db.sqlite3")}
 
 
 # Password validation
@@ -115,14 +119,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = "/static/"
+
+
 MEDIA_ROOT = BASE_DIR / "uploads"
+MEDIA_URL = "/uploads/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
 AUTH_USER_MODEL = "users.User"
 
-INTERNAL_IPS = env.list("INTERNAL_IPS", default=["127.0.0.1"])
+INTERNAL_IPS = env.list("DJANGO_INTERNAL_IPS", default=["127.0.0.1"])

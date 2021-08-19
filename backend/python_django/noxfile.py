@@ -19,7 +19,7 @@ def tests(session: nox.Session):
     session.run("black", "--check", ".")
     session.run("flake8", ".")
     session.run("isort", "--check", ".")
-    session.run("dotenv-linter", ".env.example")
+    session.run("dotenv-linter", ".env.dev")
     session.run("mypy", ".")
     session.run("safety", "check")
     session.run("pytest")
