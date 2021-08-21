@@ -40,7 +40,7 @@ class User(AbstractUser):
         str
             the full name of the user
         """
-        return self.full_name or ""
+        return str(self.full_name)
 
     def get_short_name(self) -> str:
         """Get the short name of the user.
@@ -50,4 +50,4 @@ class User(AbstractUser):
         str
             the short name of the user
         """
-        return self.short_name or ""
+        return str(self.short_name)

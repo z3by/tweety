@@ -1,6 +1,6 @@
 [flake8]
 docstring-convention=numpy
-ignore = S101
+ignore = S101,
 max-complexity = 6
 max-line-length = 100
 show-source = true
