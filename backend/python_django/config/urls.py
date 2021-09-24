@@ -16,8 +16,9 @@ admin.site.index_title = _("Tweety Administration")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/v1/", include("apps.api.v1_urls")),
+    path("api/v1/", include("apps.api.v1_urls", namespace="api")),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("oauth2/", include("oauth2_provider.urls", namespace="oauth2_provider")),
 ]
 
 media_patterns: list = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

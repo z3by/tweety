@@ -35,6 +35,7 @@ COPY pyproject.toml poetry.lock requirements.txt /code/
 
 # Install dependencies:
 RUN pip install -r requirements.txt
-RUN poetry install
+RUN --mount=type=cache,target=${POETRY_CACHE_DIR}}\
+    poetry install
 # copy project
 COPY . .

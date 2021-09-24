@@ -7,6 +7,8 @@ from pathlib import Path
 
 from environ import Env
 
+from .oauth2_scopes import SCOPES
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = Env()
@@ -36,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Third party apps
+    "oauth2_provider",
     "rest_framework",
     "django_extensions",
     "debug_toolbar",
@@ -137,10 +140,11 @@ INTERNAL_IPS = env.list("DJANGO_INTERNAL_IPS", default=["127.0.0.1"])
 
 # Django Rest Framework
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly",
-    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.NamespaceVersioning",
 }
+
+OAUTH2_PROVIDER = {"SCOPES": SCOPES, "READ_SCOPE": "read", "WRITE_SCOPE": "write"}
