@@ -1,0 +1,41 @@
+# The base image we want to inherit from
+FROM python:3.9.6-slim-buster AS development_build
+
+ARG DJANGO_ENV
+
+ENV DJANGO_ENV=${DJANGO_ENV} \
+  # python:
+  PYTHONFAULTHANDLER=1 \
+  PYTHONUNBUFFERED=1 \
+  PYTHONHASHSEED=random \
+  # pip:
+  PIP_NO_CACHE_DIR=off \
+  PIP_DISABLE_PIP_VERSION_CHECK=on \
+  PIP_DEFAULT_TIMEOUT=100 \
+  # poetry:
+  POETRY_VIRTUALENVS_CREATE=false \
+  POETRY_CACHE_DIR='/var/cache/pypoetry'
+
+# System deps:
+RUN apt-get update \
+  && apt-get install --no-install-recommends -y \
+    bash \
+    build-essential \
+    curl \
+    gettext \
+    git \
+    libpq-dev \
+    wget \
+  # Cleaning cache:
+  && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+
+# set work directory
+WORKDIR /code
+COPY pyproject.toml poetry.lock requirements.txt /code/
+
+# Install dependencies:
+RUN pip install -r requirements.txt
+RUN --mount=type=cache,target=${POETRY_CACHE_DIR}}\
+    poetry install
+# copy project
+COPY . .

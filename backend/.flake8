@@ -1,8 +1,0 @@
-[flake8]
-docstring-style = "numpy"
-ignore = "D100,D104,D401,W504,RST303,RST304,DAR103,DAR203"
-max-complexity = 6
-max-line-length = 100
-show-source = true
-strictness = "long"
-exclude = .nox,.git,*/migrations/*,*/static/CACHE/*,docs,node_modules,venv

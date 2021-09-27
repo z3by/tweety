@@ -1,0 +1,8 @@
+[flake8]
+docstring-convention=numpy
+ignore = S101,
+max-complexity = 6
+max-line-length = 100
+show-source = true
+strictness = "long"
+exclude = .nox,.git,*/migrations/*,*/static/CACHE/*,docs,node_modules,venv
