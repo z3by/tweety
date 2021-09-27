@@ -23,3 +23,7 @@ jobs:
 
       - name: Tear down the Stack
         run: docker-compose down
+      - name: Block Merge Commits
+        uses: z3by/block-merge-commits-action@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
