@@ -1,1 +1,0 @@
-"""The users django app."""

@@ -1,5 +1,3 @@
-"""Django Rest Framework Serializers module."""
-
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
@@ -7,14 +5,7 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    """A model serializer for the User Model."""
-
     class Meta:
-        """Override the config of the serializer.
-
-        https://www.django-rest-framework.org/api-guide/serializers/#hyperlinkedmodelserializer
-        """
-
         model = User
         fields = [
             "url",

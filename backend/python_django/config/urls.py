@@ -1,5 +1,3 @@
-"""Main application urlconf."""
-
 import debug_toolbar
 from django.conf import settings
 from django.conf.urls.static import static
@@ -16,8 +14,6 @@ admin.site.index_title = _("Tweety Administration")
 
 
 class Oauth2Urls:
-    """Oauth2 Url config."""
-
     urlpatterns = base_urlpatterns + oidc_urlpatterns
     app_name = "oauth2_provider"
 

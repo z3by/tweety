@@ -1,4 +1,3 @@
-# flake8: noqa: D100
 from django.apps import AppConfig
 
 
