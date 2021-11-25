@@ -22,7 +22,7 @@ Markdown = "^3.3.4"
 django-filter = "^2.4.0"
 PyYAML = "^5.4.1"
 uritemplate = "^3.0.1"
-
+django-oauth-toolkit = "^1.5.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"

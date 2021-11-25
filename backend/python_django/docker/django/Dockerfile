@@ -1,5 +1,5 @@
 # The base image we want to inherit from
-FROM python:3.9.6-slim-buster AS development_build
+FROM python:3.10.0-slim-buster AS development_build
 
 ARG DJANGO_ENV
 
