@@ -153,9 +153,7 @@ OAUTH2_SCOPES = {
 }
 
 # WARNING: this RSA key is only for development, create your own key for production.
-OIDC_RSA_PRIVATE_KEY_PATH = env.str(
-    "OIDC_RSA_PRIVATE_KEY_PATH", default=BASE_DIR / "oidc-dev.key"
-)
+OIDC_RSA_PRIVATE_KEY_PATH = env.str("OIDC_RSA_PRIVATE_KEY_PATH", default=BASE_DIR / "oidc-dev.key")
 with open(OIDC_RSA_PRIVATE_KEY_PATH) as oidc_key_file:
     OIDC_RSA_PRIVATE_KEY = oidc_key_file.read()
 

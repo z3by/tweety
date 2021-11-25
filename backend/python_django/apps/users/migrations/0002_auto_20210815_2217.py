@@ -19,7 +19,9 @@ class Migration(migrations.Migration):
             model_name="user",
             name="cover",
             field=models.ImageField(
-                blank=True, upload_to="img/profile/covers", verbose_name="Cover Photo"
+                blank=True,
+                upload_to="img/profile/covers",
+                verbose_name="Cover Photo",
             ),
         ),
         migrations.AddField(
@@ -30,9 +32,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="user",
             name="location",
-            field=models.CharField(
-                blank=True, max_length=200, null=True, verbose_name="Location"
-            ),
+            field=models.CharField(blank=True, max_length=200, null=True, verbose_name="Location"),
         ),
         migrations.AddField(
             model_name="user",
@@ -51,8 +51,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="user",
             name="short_name",
-            field=models.CharField(
-                blank=True, max_length=50, null=True, verbose_name="short name"
-            ),
+            field=models.CharField(blank=True, max_length=50, null=True, verbose_name="short name"),
         ),
     ]
