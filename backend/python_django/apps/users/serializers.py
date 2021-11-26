@@ -19,9 +19,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             "photo",
             "cover",
             "birth_date",
-            "is_superuser",
-            "is_staff",
-            "is_active",
             "date_joined",
         ]
         extra_kwargs = {
