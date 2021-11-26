@@ -5,18 +5,19 @@ from django.urls import reverse
 from rest_framework.response import Response
 from rest_framework.test import APIClient
 
+from apps.users.models import User
+
 from .factories import UserFactory
 
 
 @pytest.mark.django_db
 def test_list_users_no_staff(api_client: APIClient):
     """Test that list users doesn't include staff."""
-    url = reverse("user-list")
+    url = reverse("api:user-list")
     UserFactory.create_batch(3)
     UserFactory.create_batch(2, is_staff=True)
 
-    response: Response = api_client.get(url, format="json")
+    response: Response = api_client.get(url)
     assert response.status_code == 200
-    assert len(response.data) == 3, "staff users should not be returned"
-    for user in response.data:
-        assert not user["is_staff"]
+    for user in response.json():
+        assert not User.objects.get(username=user["username"]).is_staff

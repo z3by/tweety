@@ -1,8 +1,3 @@
-"""Django settings module.
-
-for all available Django settings refer
-to https://docs.djangoproject.com/en/3.2/ref/settings/
-"""
 from pathlib import Path
 
 from environ import Env
@@ -36,6 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Third party apps
+    "oauth2_provider",
     "rest_framework",
     "django_extensions",
     "debug_toolbar",
@@ -135,12 +131,35 @@ AUTH_USER_MODEL = "users.User"
 
 INTERNAL_IPS = env.list("DJANGO_INTERNAL_IPS", default=["127.0.0.1"])
 
-# Django Rest Framework
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly",
-    ],
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
+    ),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.NamespaceVersioning",
+    "TEST_REQUEST_DEFAULT_FORMAT": "json",
 }
+
+
+OAUTH2_SCOPES = {
+    "openid": "OpenID Connect scope",
+    "users": "Gives full read-write access to users",
+    "users:read": "Gives read access to users",
+    "users:write": "Gives write access to users.",
+}
+
+# WARNING: this RSA key is only for development, create your own key for production.
+OIDC_RSA_PRIVATE_KEY_PATH = env.str("OIDC_RSA_PRIVATE_KEY_PATH", default=BASE_DIR / "oidc-dev.key")
+with open(OIDC_RSA_PRIVATE_KEY_PATH) as oidc_key_file:
+    OIDC_RSA_PRIVATE_KEY = oidc_key_file.read()
+
+OAUTH2_PROVIDER = {
+    "SCOPES": OAUTH2_SCOPES,
+    "READ_SCOPE": "read",
+    "WRITE_SCOPE": "write",
+    "PKCE_REQUIRED": True,
+    "OIDC_ENABLED": True,
+    "OIDC_RSA_PRIVATE_KEY": OIDC_RSA_PRIVATE_KEY,
+}
+
+LOGIN_URL = "/api-auth/login/"
