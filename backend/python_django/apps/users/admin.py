@@ -4,14 +4,13 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
 from .forms import UserChangeForm, UserCreationForm
+from .models import Follow
 
 User = get_user_model()
 
 
 @admin.register(User)
 class UserAdmin(auth_admin.UserAdmin):
-    """Register User model in django admin site."""
-
     form = UserChangeForm
     add_form = UserCreationForm
     fieldsets = (
@@ -46,3 +45,8 @@ class UserAdmin(auth_admin.UserAdmin):
     )
     list_display = ["username", "full_name", "is_superuser"]
     search_fields = ["full_name"]
+
+
+@admin.register(Follow)
+class FollowAdmin(admin.ModelAdmin):
+    list_display = ["source", "target"]
