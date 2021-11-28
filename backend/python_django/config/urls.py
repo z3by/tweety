@@ -6,6 +6,8 @@ from django.urls import include, path
 from django.utils.translation import gettext_lazy as _
 from oauth2_provider.urls import base_urlpatterns, oidc_urlpatterns
 
+from apps.users.urls import urlpatterns as users_urlpatterns
+
 admin.site.site_title = _("Tweety Admin Site")
 
 admin.site.site_header = _("Tweety Administration")
@@ -20,9 +22,9 @@ class Oauth2Urls:
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/v1/", include("apps.api.v1_urls", namespace="api")),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("oauth2/", include(Oauth2Urls, namespace="oauth2_provider")),
+    path("api/v1/", include(users_urlpatterns)),
 ]
 
 media_patterns: list = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
