@@ -4,7 +4,7 @@ import pytest
 from django.test.client import Client
 from django.urls import reverse
 
-from ..models import User, Follow
+from ..models import Follow, User
 from .factories import UserFactory
 
 pytestmark = pytest.mark.django_db

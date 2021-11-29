@@ -1,8 +1,6 @@
 from rest_framework_nested import routers
 
-from .views import UserViewSet
-from .views import FollowersViewSet
-from .views import FollowingViewSet
+from .views import FollowersViewSet, FollowingViewSet, UserViewSet
 
 USERS_PREFIX = r"users"
 FOLLOWERS_PREFIX = r"followers"
