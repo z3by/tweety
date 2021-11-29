@@ -23,6 +23,7 @@ django-filter = "^2.4.0"
 PyYAML = "^5.4.1"
 uritemplate = "^3.0.1"
 django-oauth-toolkit = "^1.5.0"
+drf-nested-routers = "^0.93.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
@@ -54,7 +55,7 @@ norecursedirs = ".tox .git */migrations/* */static/* docs venv"
 
 
 [tool.coverage.run]
-omit = [".*", "*/site-packages/*"]
+omit = [".*", "*/site-packages/*", "*/test/*"]
 
 [tool.coverage.report]
 fail_under = 90

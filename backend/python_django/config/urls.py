@@ -20,11 +20,16 @@ class Oauth2Urls:
     app_name = "oauth2_provider"
 
 
+class ApiVersionOneUrls:
+    urlpatterns = users_urlpatterns
+    app_name = "api_v1"
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("oauth2/", include(Oauth2Urls, namespace="oauth2_provider")),
-    path("api/v1/", include(users_urlpatterns)),
+    path("api/v1/", include(ApiVersionOneUrls, namespace="api_v1")),
 ]
 
 media_patterns: list = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

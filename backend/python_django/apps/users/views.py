@@ -13,3 +13,31 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     lookup_field = "username"
     required_scopes = ["users"]
+
+
+class FollowersViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [permissions.IsAdminUser | TokenHasResourceScope | TokenHasScope]
+    serializer_class = UserSerializer
+    lookup_field = "username"
+    required_scopes = ["users"]
+
+    def get_user(self):
+        return User.objects.get(username=self.kwargs["user_username"])
+
+    def get_queryset(self):
+        user = self.get_user()
+        return user.followers.all()
+
+
+class FollowingViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [permissions.IsAdminUser | TokenHasResourceScope | TokenHasScope]
+    serializer_class = UserSerializer
+    lookup_field = "username"
+    required_scopes = ["users"]
+
+    def get_user(self):
+        return User.objects.get(username=self.kwargs["user_username"])
+
+    def get_queryset(self):
+        user = self.get_user()
+        return user.following.all()
