@@ -69,3 +69,9 @@ use_parentheses = true
 
 [tool.black]
 line-length = 100
+exclude = '''
+/(
+  | migrations
+)/
+
+'''
