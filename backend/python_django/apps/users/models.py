@@ -36,12 +36,6 @@ class User(AbstractUser):
         symmetrical=False,
     )
 
-    def get_full_name(self) -> str:
-        return str(self.full_name)
-
-    def get_short_name(self) -> str:
-        return str(self.short_name)
-
 
 class Follow(models.Model):
     source = models.ForeignKey(User, related_name="+", on_delete=models.CASCADE)

@@ -1,7 +1,10 @@
+from http import HTTPStatus
+
 import debug_toolbar
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.http.response import JsonResponse
 from django.urls import include, path
 from django.utils.translation import gettext_lazy as _
 from oauth2_provider.urls import base_urlpatterns, oidc_urlpatterns
@@ -41,3 +44,13 @@ dev_patterns = [
 
 if settings.DEBUG:
     urlpatterns += dev_patterns
+
+
+def handler404(request, exception=None):
+    return JsonResponse({"detail": "Not Found"}, status=HTTPStatus.NOT_FOUND)
+
+
+def handler500(request, exception=None):
+    return JsonResponse(
+        {"detail": "Internal Server Error "}, status=HTTPStatus.INTERNAL_SERVER_ERROR
+    )

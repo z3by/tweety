@@ -163,3 +163,4 @@ OAUTH2_PROVIDER = {
 }
 
 LOGIN_URL = "/api-auth/login/"
+APPEND_SLASH = False
