@@ -163,7 +163,7 @@ paths:
                   $ref: '#/components/schemas/User'
           description: ''
       tags:
-      - api
+      - users
   /api/v1/users/{followed_username}/followers/{username}/:
     get:
       operationId: retrieveFollowers
@@ -189,7 +189,7 @@ paths:
                 $ref: '#/components/schemas/User'
           description: ''
       tags:
-      - api
+      - users
   /api/v1/users/{follower_username}/following/:
     get:
       operationId: listFollowedUsers
@@ -211,7 +211,7 @@ paths:
                   $ref: '#/components/schemas/User'
           description: ''
       tags:
-      - api
+      - users
   /api/v1/users/{follower_username}/following/{username}/:
     get:
       operationId: retrieveFollowedUsers
@@ -237,7 +237,7 @@ paths:
                 $ref: '#/components/schemas/User'
           description: ''
       tags:
-      - api
+      - users
     put:
       operationId: FollowUser
       description: ''
@@ -273,7 +273,7 @@ paths:
                 $ref: '#/components/schemas/User'
           description: ''
       tags:
-      - api
+      - users
     delete:
       operationId: UnFollowUser
       description: ''
@@ -294,7 +294,7 @@ paths:
         '204':
           description: ''
       tags:
-      - api
+      - users
 components:
   schemas:
     User:

@@ -9,6 +9,9 @@ class BaseAutoSchema(AutoSchema):
             self.base_name += "s"
         return self.base_name
 
+    def get_tags(self, path, method):
+        return ["users"]
+
 
 class FollowerSchema(BaseAutoSchema):
     base_name = "Follower"
@@ -23,3 +26,6 @@ class FollowingSchema(BaseAutoSchema):
         if method.lower() == "delete":
             return "UnFollowUser"
         return super().get_operation_id(path, method)
+
+    def get_tags(self, path, method):
+        return ["users"]
