@@ -32,4 +32,5 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         ]
         extra_kwargs = {
             "url": {"view_name": "user-detail", "lookup_field": "username"},
+            "date_joined": {"read_only": True},
         }
