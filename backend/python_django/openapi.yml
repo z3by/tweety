@@ -144,7 +144,7 @@ paths:
       - api
   /api/v1/users/{user_username}/followers/:
     get:
-      operationId: listUsers
+      operationId: listFollowers
       description: ''
       parameters:
       - name: user_username
@@ -166,7 +166,7 @@ paths:
       - api
   /api/v1/users/{user_username}/followers/{username}/:
     get:
-      operationId: retrieveUser
+      operationId: retrieveFollowers
       description: ''
       parameters:
       - name: user_username
@@ -192,7 +192,7 @@ paths:
       - api
   /api/v1/users/{user_username}/following/:
     get:
-      operationId: listUsers
+      operationId: listFollowedUsers
       description: ''
       parameters:
       - name: user_username
@@ -214,7 +214,7 @@ paths:
       - api
   /api/v1/users/{user_username}/following/{username}/:
     get:
-      operationId: retrieveUser
+      operationId: retrieveFollowedUsers
       description: ''
       parameters:
       - name: user_username
@@ -235,6 +235,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateFollowedUsers
+      description: ''
+      parameters:
+      - name: user_username
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: username
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyFollowedUsers
+      description: ''
+      parameters:
+      - name: user_username
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: username
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '204':
           description: ''
       tags:
       - api
@@ -294,6 +351,12 @@ components:
         date_joined:
           type: string
           format: date-time
+        following_url:
+          type: string
+          readOnly: true
+        followers_url:
+          type: string
+          readOnly: true
       required:
       - username
       - full_name

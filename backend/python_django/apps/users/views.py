@@ -5,6 +5,8 @@ from oauth2_provider.contrib.rest_framework.permissions import TokenHasResourceS
 from rest_framework import permissions, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
+
+from .schema import FollowerSchema, FollowingSchema
 from .serializers import UserSerializer
 
 User = get_user_model()
@@ -25,6 +27,7 @@ class FollowersViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     lookup_field = "username"
     required_scopes = ["users"]
+    schema = FollowerSchema()
 
     def get_user(self):
         return User.objects.get(username=self.kwargs["user_username"])
@@ -39,6 +42,7 @@ class FollowingViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = UserSerializer
     lookup_field = "username"
     required_scopes = ["users"]
+    schema = FollowingSchema()
 
     def get_follower(self) -> User:
         user = get_object_or_404(User, username=self.kwargs["user_username"])
