@@ -30,7 +30,7 @@ class FollowersViewSet(viewsets.ReadOnlyModelViewSet):
     schema = FollowerSchema()
 
     def get_user(self):
-        return User.objects.get(username=self.kwargs["user_username"])
+        return User.objects.get(username=self.kwargs["followed_username"])
 
     def get_queryset(self):
         user = self.get_user()
@@ -45,7 +45,7 @@ class FollowingViewSet(viewsets.ReadOnlyModelViewSet):
     schema = FollowingSchema()
 
     def get_follower(self) -> User:
-        user = get_object_or_404(User, username=self.kwargs["user_username"])
+        user = get_object_or_404(User, username=self.kwargs["follower_username"])
         return user
 
     def get_followed_user(self) -> User:

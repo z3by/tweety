@@ -142,12 +142,12 @@ paths:
           description: ''
       tags:
       - api
-  /api/v1/users/{user_username}/followers/:
+  /api/v1/users/{followed_username}/followers/:
     get:
       operationId: listFollowers
       description: ''
       parameters:
-      - name: user_username
+      - name: followed_username
         in: path
         required: true
         description: ''
@@ -164,12 +164,12 @@ paths:
           description: ''
       tags:
       - api
-  /api/v1/users/{user_username}/followers/{username}/:
+  /api/v1/users/{followed_username}/followers/{username}/:
     get:
       operationId: retrieveFollowers
       description: ''
       parameters:
-      - name: user_username
+      - name: followed_username
         in: path
         required: true
         description: ''
@@ -190,12 +190,12 @@ paths:
           description: ''
       tags:
       - api
-  /api/v1/users/{user_username}/following/:
+  /api/v1/users/{follower_username}/following/:
     get:
       operationId: listFollowedUsers
       description: ''
       parameters:
-      - name: user_username
+      - name: follower_username
         in: path
         required: true
         description: ''
@@ -212,12 +212,12 @@ paths:
           description: ''
       tags:
       - api
-  /api/v1/users/{user_username}/following/{username}/:
+  /api/v1/users/{follower_username}/following/{username}/:
     get:
       operationId: retrieveFollowedUsers
       description: ''
       parameters:
-      - name: user_username
+      - name: follower_username
         in: path
         required: true
         description: ''
@@ -239,10 +239,10 @@ paths:
       tags:
       - api
     put:
-      operationId: updateFollowedUsers
+      operationId: FollowUser
       description: ''
       parameters:
-      - name: user_username
+      - name: follower_username
         in: path
         required: true
         description: ''
@@ -275,10 +275,10 @@ paths:
       tags:
       - api
     delete:
-      operationId: destroyFollowedUsers
+      operationId: UnFollowUser
       description: ''
       parameters:
-      - name: user_username
+      - name: follower_username
         in: path
         required: true
         description: ''

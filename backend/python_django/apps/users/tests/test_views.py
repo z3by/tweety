@@ -38,7 +38,7 @@ def test_list_users_no_staff(api_client: APIClient):
 @pytest.mark.django_db
 def test_list_user_followers(api_client: APIClient, user_with_one_follower):
     first_user, follower = user_with_one_follower
-    url = reverse("api_v1:followers-list", kwargs=dict(user_username=first_user.username))
+    url = reverse("api_v1:followers-list", kwargs=dict(followed_username=first_user.username))
     response: Response = api_client.get(url)
     assert response.status_code == 200
     assert response.json()[0]["username"] == follower.username
@@ -49,7 +49,7 @@ def test_retreive_single_user_follower(api_client: APIClient, user_with_one_foll
     first_user, follower = user_with_one_follower
     url = reverse(
         "api_v1:followers-detail",
-        kwargs=dict(user_username=first_user.username, username=follower.username),
+        kwargs=dict(followed_username=first_user.username, username=follower.username),
     )
     response: Response = api_client.get(url)
     assert response.status_code == 200
@@ -59,7 +59,7 @@ def test_retreive_single_user_follower(api_client: APIClient, user_with_one_foll
 @pytest.mark.django_db
 def test_list_users_followed_by_a_user(api_client: APIClient, user_with_one_follower):
     first_user, follower = user_with_one_follower
-    url = reverse("api_v1:following-list", kwargs=dict(user_username=follower.username))
+    url = reverse("api_v1:following-list", kwargs=dict(follower_username=follower.username))
     response: Response = api_client.get(url)
     assert response.status_code == 200
     assert response.json()[0]["username"] == first_user.username
@@ -71,7 +71,7 @@ def test_user_can_follow_or_unfollow_another_user(user: User, api_client: APICli
 
     url = reverse(
         "api_v1:following-detail",
-        kwargs=dict(user_username=user.username, username=second_user.username),
+        kwargs=dict(follower_username=user.username, username=second_user.username),
     )
     # before following
     response: Response = api_client.get(url)
@@ -98,7 +98,7 @@ def test_user_can_follow_or_unfollow_another_user(user: User, api_client: APICli
 def test_users_can_not_follow_themselves(user: User, api_client: APIClient):
     url = reverse(
         "api_v1:following-detail",
-        kwargs=dict(user_username=user.username, username=user.username),
+        kwargs=dict(follower_username=user.username, username=user.username),
     )
     response: Response = api_client.put(url)
     assert response.status_code == 403
@@ -111,7 +111,7 @@ def test_only_authenticated_user_can_follow(user: User, api_client: APIClient):
 
     url = reverse(
         "api_v1:following-detail",
-        kwargs=dict(user_username=second_user.username, username=user.username),
+        kwargs=dict(follower_username=second_user.username, username=user.username),
     )
     response: Response = api_client.put(url)
     assert response.status_code == 403

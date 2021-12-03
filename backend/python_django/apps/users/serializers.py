@@ -6,10 +6,10 @@ User = get_user_model()
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     following_url = serializers.HyperlinkedIdentityField(
-        view_name="following-list", lookup_url_kwarg="user_username", lookup_field="username"
+        view_name="following-list", lookup_url_kwarg="follower_username", lookup_field="username"
     )
     followers_url = serializers.HyperlinkedIdentityField(
-        view_name="followers-list", lookup_url_kwarg="user_username", lookup_field="username"
+        view_name="followers-list", lookup_url_kwarg="followed_username", lookup_field="username"
     )
 
     class Meta:

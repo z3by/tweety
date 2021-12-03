@@ -16,3 +16,10 @@ class FollowerSchema(BaseAutoSchema):
 
 class FollowingSchema(BaseAutoSchema):
     base_name = "FollowedUser"
+
+    def get_operation_id(self, path, method):
+        if method.lower() == "put":
+            return "FollowUser"
+        if method.lower() == "delete":
+            return "UnFollowUser"
+        return super().get_operation_id(path, method)
