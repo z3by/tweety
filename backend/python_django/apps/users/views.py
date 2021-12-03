@@ -5,12 +5,11 @@ from oauth2_provider.contrib.rest_framework.permissions import TokenHasResourceS
 from rest_framework import permissions, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-
 from .serializers import UserSerializer
 
 User = get_user_model()
 
-DEFAULT_PERMISSION_CLASSES = [permissions.IsAdminUser | TokenHasResourceScope | TokenHasScope]
+DEFAULT_PERMISSION_CLASSES = [TokenHasResourceScope | TokenHasScope | permissions.IsAuthenticated]
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -56,6 +55,13 @@ class FollowingViewSet(viewsets.ReadOnlyModelViewSet):
     def update(self, request, *args, **kwargs):
         follower = self.get_follower()
         followed_user = self.get_followed_user()
+        if follower != request.user:
+            return Response({"detail": "Forbidden"}, status=HTTPStatus.FORBIDDEN)
+        if follower == followed_user:
+            return Response(
+                {"detail": "You can not follow yourself, unless you are a shadow 🤷"},
+                status=HTTPStatus.FORBIDDEN,
+            )
         try:
             follower.following.get(username=followed_user.username)
             return Response(status=HTTPStatus.NOT_MODIFIED)
@@ -66,5 +72,7 @@ class FollowingViewSet(viewsets.ReadOnlyModelViewSet):
     def destroy(self, request, *args, **kwargs):
         follower = self.get_follower()
         followed_user = self.get_followed_user()
+        if follower != request.user:
+            return Response({"detail": "Forbidden"}, status=HTTPStatus.FORBIDDEN)
         follower.following.remove(followed_user)
         return Response(status=HTTPStatus.NO_CONTENT)

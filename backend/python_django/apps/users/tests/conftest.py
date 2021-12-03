@@ -13,13 +13,12 @@ def media_storage(settings, tmpdir):
 
 @pytest.fixture
 def user() -> User:
-    return UserFactory()
+    user: User = UserFactory.create()
+    return user
 
 
 @pytest.fixture
 def api_client(user: User) -> APIClient:
-    user.is_superuser = True
-    user.is_staff = True
     client = APIClient()
     client.force_authenticate(user=user)
     return client

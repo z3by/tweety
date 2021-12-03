@@ -22,11 +22,15 @@ def user_with_one_follower():
 def test_list_users_no_staff(api_client: APIClient):
     """Test that list users doesn't include staff."""
     url = reverse("api_v1:user-list")
-    UserFactory.create_batch(3)
-    UserFactory.create_batch(2, is_staff=True)
 
     response: Response = api_client.get(url)
     assert response.status_code == 200
+    assert len(response.json()) == 1
+    UserFactory.create_batch(2, is_staff=True)
+    UserFactory.create_batch(2)
+
+    response: Response = api_client.get(url)
+    assert len(response.json()) == 3
     for user in response.json():
         assert not User.objects.get(username=user["username"]).is_staff
 
@@ -62,13 +66,12 @@ def test_list_users_followed_by_a_user(api_client: APIClient, user_with_one_foll
 
 
 @pytest.mark.django_db
-def test_user_can_follow_or_unfollow_another_user(api_client: APIClient):
-    first_user: User = UserFactory.create()
+def test_user_can_follow_or_unfollow_another_user(user: User, api_client: APIClient):
     second_user: User = UserFactory.create()
 
     url = reverse(
         "api_v1:following-detail",
-        kwargs=dict(user_username=first_user.username, username=second_user.username),
+        kwargs=dict(user_username=user.username, username=second_user.username),
     )
     # before following
     response: Response = api_client.get(url)
@@ -89,3 +92,27 @@ def test_user_can_follow_or_unfollow_another_user(api_client: APIClient):
     # after un-following
     response: Response = api_client.get(url)
     assert response.status_code == 404
+
+
+@pytest.mark.django_db
+def test_users_can_not_follow_themselves(user: User, api_client: APIClient):
+    url = reverse(
+        "api_v1:following-detail",
+        kwargs=dict(user_username=user.username, username=user.username),
+    )
+    response: Response = api_client.put(url)
+    assert response.status_code == 403
+    assert response.json() == {"detail": "You can not follow yourself, unless you are a shadow 🤷"}
+
+
+@pytest.mark.django_db
+def test_only_authenticated_user_can_follow(user: User, api_client: APIClient):
+    second_user: User = UserFactory.create()
+
+    url = reverse(
+        "api_v1:following-detail",
+        kwargs=dict(user_username=second_user.username, username=user.username),
+    )
+    response: Response = api_client.put(url)
+    assert response.status_code == 403
+    assert response.json() == {"detail": "Forbidden"}
