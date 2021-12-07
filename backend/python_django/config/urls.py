@@ -10,6 +10,7 @@ from django.utils.translation import gettext_lazy as _
 from oauth2_provider.urls import base_urlpatterns, oidc_urlpatterns
 
 from apps.users.urls import urlpatterns as users_urlpatterns
+from apps.tweets.urls import urlpatterns as tweets_urlpatterns
 
 admin.site.site_title = _("Tweety Admin Site")
 
@@ -24,7 +25,7 @@ class Oauth2Urls:
 
 
 class ApiVersionOneUrls:
-    urlpatterns = users_urlpatterns
+    urlpatterns = users_urlpatterns + tweets_urlpatterns
     app_name = "api_v1"
 
 

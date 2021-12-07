@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "nplusone.ext.django",
     # Local apps
     "apps.users",
+    "apps.tweets",
 ]
 
 MIDDLEWARE = [

@@ -6,7 +6,7 @@ USERS_PREFIX = r"users"
 FOLLOWERS_PREFIX = r"followers"
 FOLLOWING_PREFIX = r"following"
 
-router = routers.DefaultRouter()
+router = routers.SimpleRouter()
 router.register(USERS_PREFIX, UserViewSet)
 
 followers_router = routers.NestedSimpleRouter(router, USERS_PREFIX, lookup="followed")
