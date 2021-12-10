@@ -2,6 +2,7 @@ from oauth2_provider.contrib.rest_framework.permissions import TokenHasResourceS
 from rest_framework import permissions, viewsets
 
 from .models import Tweet
+from .schema import UserTweetsSchema
 from .serializers import TweetSerializer
 
 DEFAULT_PERMISSION_CLASSES = [TokenHasResourceScope | TokenHasScope | permissions.IsAuthenticated]
@@ -21,6 +22,7 @@ class UserTweetsViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = DEFAULT_PERMISSION_CLASSES
     serializer_class = TweetSerializer
     required_scopes = ["tweets"]
+    schema = UserTweetsSchema()
 
     def get_queryset(self):
         author_username = self.kwargs["author_username"]

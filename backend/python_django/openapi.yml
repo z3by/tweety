@@ -295,6 +295,191 @@ paths:
           description: ''
       tags:
       - users
+  /api/v1/tweets/:
+    get:
+      operationId: listTweets
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tweet'
+          description: ''
+      tags:
+      - api
+    post:
+      operationId: createTweet
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tweet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Tweet'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Tweet'
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tweet'
+          description: ''
+      tags:
+      - api
+  /api/v1/tweets/{id}/:
+    get:
+      operationId: retrieveTweet
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this tweet.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tweet'
+          description: ''
+      tags:
+      - api
+    put:
+      operationId: updateTweet
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this tweet.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tweet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Tweet'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Tweet'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tweet'
+          description: ''
+      tags:
+      - api
+    patch:
+      operationId: partialUpdateTweet
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this tweet.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tweet'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Tweet'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Tweet'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tweet'
+          description: ''
+      tags:
+      - api
+    delete:
+      operationId: destroyTweet
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this tweet.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+      tags:
+      - api
+  /api/v1/users/{author_username}/tweets/:
+    get:
+      operationId: listUserTweets
+      description: ''
+      parameters:
+      - name: author_username
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tweet'
+          description: ''
+      tags:
+      - tweets
+      - users
+  /api/v1/users/{author_username}/tweets/{id}/:
+    get:
+      operationId: retrieveUserTweets
+      description: ''
+      parameters:
+      - name: author_username
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tweet'
+          description: ''
+      tags:
+      - tweets
+      - users
 components:
   schemas:
     User:
@@ -351,12 +536,41 @@ components:
         date_joined:
           type: string
           format: date-time
-        following_url:
+          readOnly: true
+        following:
           type: string
           readOnly: true
-        followers_url:
+        followers:
+          type: string
+          readOnly: true
+        tweets:
           type: string
           readOnly: true
       required:
       - username
       - full_name
+    Tweet:
+      type: object
+      properties:
+        url:
+          type: string
+          readOnly: true
+        text:
+          type: string
+          maxLength: 280
+        created_date:
+          type: string
+          format: date-time
+          readOnly: true
+        modified_date:
+          type: string
+          format: date-time
+          readOnly: true
+        author:
+          type: string
+          readOnly: true
+        in_reply_to_status:
+          type: string
+          nullable: true
+      required:
+      - text
