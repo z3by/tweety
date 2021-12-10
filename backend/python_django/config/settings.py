@@ -147,6 +147,9 @@ OAUTH2_SCOPES = {
     "users": "Gives full read-write access to users",
     "users:read": "Gives read access to users",
     "users:write": "Gives write access to users.",
+    "tweets": "Gives full read-write access to user tweets",
+    "tweets:read": "Gives read access to user tweets",
+    "tweets:write": "Gives write access to user tweets.",
 }
 
 # WARNING: this RSA key is only for development, create your own key for production.
