@@ -9,8 +9,8 @@ from django.urls import include, path
 from django.utils.translation import gettext_lazy as _
 from oauth2_provider.urls import base_urlpatterns, oidc_urlpatterns
 
-from apps.users.urls import urlpatterns as users_urlpatterns
 from apps.tweets.urls import urlpatterns as tweets_urlpatterns
+from apps.users.urls import urlpatterns as users_urlpatterns
 
 admin.site.site_title = _("Tweety Admin Site")
 

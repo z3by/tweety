@@ -1,8 +1,8 @@
 from oauth2_provider.contrib.rest_framework.permissions import TokenHasResourceScope, TokenHasScope
 from rest_framework import permissions, viewsets
-from .serializers import TweetSerializer
-from .models import Tweet
 
+from .models import Tweet
+from .serializers import TweetSerializer
 
 DEFAULT_PERMISSION_CLASSES = [TokenHasResourceScope | TokenHasScope | permissions.IsAuthenticated]
 

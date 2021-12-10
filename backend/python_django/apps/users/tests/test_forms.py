@@ -10,13 +10,6 @@ pytestmark = pytest.mark.django_db
 
 
 def test_username_validation_error_msg(user: User):
-    """Test username validation error message is correct.
-
-    Parameters
-    ----------
-    user : User
-        the user object provided by factory boy
-    """
     form = UserCreationForm(
         {
             "username": user.username,

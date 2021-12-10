@@ -49,8 +49,8 @@ Werkzeug = "^2.0.2"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-v --cov --cov-report=html --ds=config.settings --reuse-db"
-python_files = "tests.py test_*.py"
+addopts = "-s -vv --cov --cov-report=html --ds=config.settings --reuse-db --cache-clear --disable-pytest-warnings"
+python_files = "tests test_*.py"
 norecursedirs = ".tox .git */migrations/* */static/* docs venv"
 
 

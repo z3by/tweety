@@ -2,8 +2,8 @@
 import pytest
 from rest_framework.test import APIClient
 
-from ..models import User
-from .factories import UserFactory
+from .users.models import User
+from .users.tests.factories import UserFactory
 
 
 @pytest.fixture(autouse=True)

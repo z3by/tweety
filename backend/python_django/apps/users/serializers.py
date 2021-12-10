@@ -12,7 +12,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         view_name="followers-list", lookup_url_kwarg="followed_username", lookup_field="username"
     )
     tweets = serializers.HyperlinkedIdentityField(
-        view_name="tweets-list",
+        view_name="user-tweet-list",
         lookup_url_kwarg="author_username",
         lookup_field="username",
         read_only=True,

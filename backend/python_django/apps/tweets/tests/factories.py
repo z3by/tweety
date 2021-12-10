@@ -1,5 +1,6 @@
 from factory import Faker
 from factory.django import DjangoModelFactory
+
 from ..models import Tweet
 
 

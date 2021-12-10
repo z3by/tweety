@@ -1,7 +1,9 @@
 from rest_framework_nested import routers
 
+from apps.users.urls import USERS_PREFIX
+from apps.users.urls import router as users_router
+
 from .views import TweetsViewSet, UserTweetsViewSet
-from apps.users.urls import USERS_PREFIX, router as users_router
 
 TWEETS_PREFIX = r"tweets"
 
