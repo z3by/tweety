@@ -7,29 +7,44 @@
 <script setup lang="ts">
 import { computed, defineProps } from "vue";
 
+enum ButtonType {
+  primary = "primary",
+  text = "text",
+  secondary = "secondary",
+}
+
 interface Props {
-  type?: string;
+  type?: ButtonType;
   disabled?: boolean;
 }
 const props = defineProps<Props>();
 
 const buttonClasses = computed(() => {
   const classes = [];
+  const primaryClasses = [
+    "py-2",
+    "px-5",
+    "rounded-full",
+    "font-bold",
+    "text-lg",
+    "bg-black",
+    "text-white",
+    "hover:bg-gray-900",
+    "active:bg-gray-800",
+  ];
+  const disabledClasses = [
+    "!bg-gray-400",
+    "text-gray-200",
+    "cursor-not-allowed",
+  ];
   if (props.type === "text") {
     classes.push("text-sky-500");
-  } else {
-    classes.push(
-      "py-2",
-      "px-5",
-      "text-lg",
-      "bg-black",
-      "text-white",
-      "rounded-full",
-      "font-bold"
-    );
+  }
+  if (props.type === "primary" || props.type === undefined) {
+    classes.push(...primaryClasses);
   }
   if (props.disabled) {
-    classes.push("!bg-gray-400", "text-gray-200", "cursor-not-allowed");
+    classes.push(...disabledClasses);
   }
   return classes;
 });
