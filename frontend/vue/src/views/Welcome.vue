@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome antialiased h-screen flex flex-col">
+  <div class="welcome h-screen flex flex-col">
     <main class="flex-1">
       <div class="lg:flex lg:flex-1 lg:flex-row-reverse h-full">
         <div class="p-5 lg:mx-10 lg:min-w-xl">
@@ -42,7 +42,7 @@
           href="#"
           v-for="link in navLinks"
           :key="link"
-          class="mx-1 text-gray-700 text-sm hover:underline"
+          class="mx-1 text-cool-gray-600 text-sm hover:underline"
           >{{ link }}</a
         >
       </nav>
