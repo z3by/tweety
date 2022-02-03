@@ -11,7 +11,7 @@
             <h2 class="text-2xl sm:text-4xl font-bold">Join Tweety today.</h2>
             <router-link
               :to="{ name: 'SignUp' }"
-              class="bg-sky-500 hover:bg-sky-600 py-2 font-bold sm:px-10 rounded-full text-white block sm:w-80 text-center my-3"
+              class="bg-sky-500 hover:bg-sky-600 py-2 font-bold sm:px-10 rounded-full text-white block sm:w-80 text-center my-3 h-10 max-w-xs"
             >
               Sign up with phone or email
             </router-link>
@@ -20,7 +20,7 @@
             <h4 class="mt-5 text-xl font-bold">Already have an account?</h4>
             <router-link
               :to="{ name: 'Login' }"
-              class="border-gray-300 border hover:bg-sky-50 py-2 font-bold sm:px-10 rounded-full text-sky-500 block sm:w-80 text-center my-3"
+              class="border-gray-300 border hover:bg-sky-50 py-2 font-bold sm:px-10 rounded-full text-sky-500 block sm:w-80 text-center my-3 h-10 max-w-xs"
               >Sign in</router-link
             >
           </div>

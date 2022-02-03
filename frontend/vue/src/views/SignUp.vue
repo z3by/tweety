@@ -27,38 +27,44 @@
             <Input v-model="email" v-else name="Email" type="email" />
             <Button
               @click.prevent="usePhone = !usePhone"
-              class="my-5"
+              class="mt-4"
               type="text"
             >
               Use {{ usePhone ? "email" : "phone" }} instead
             </Button>
 
-            <h6>Date of birth</h6>
-            <p class="text-normal text-cool-gray-600 font-normal">
-              This will not be shown publicly. Confirm your own age, even if
-              this account is for a business, a pet, or something else.
-            </p>
-            <div class="flex gap-3">
-              <Select
-                name="Month"
-                class="w-1/3"
-                :options="months"
-                v-model="birthdayMonth"
-              />
-              <Select
-                name="Day"
-                class="w-1/5"
-                :options="days"
-                v-model="birthdayDay"
-              />
-              <Select
-                name="Year"
-                class="w-1/5"
-                :options="years"
-                v-model="birthdayYear"
-              />
+            <div class="mt-8">
+              <h6>Date of birth</h6>
+              <p class="text-normal text-cool-gray-600 font-normal">
+                This will not be shown publicly. Confirm your own age, even if
+                this account is for a business, a pet, or something else.
+              </p>
+              <div class="flex gap-3">
+                <Select
+                  name="Month"
+                  class="w-1/3"
+                  :options="months"
+                  v-model="birthdayMonth"
+                />
+                <Select
+                  name="Day"
+                  class="w-1/5"
+                  :options="days"
+                  v-model="birthdayDay"
+                />
+                <Select
+                  name="Year"
+                  class="w-1/5"
+                  :options="years"
+                  v-model="birthdayYear"
+                />
+              </div>
             </div>
-            <Button class="w-full mt-5" :disabled="false">Sign up</Button>
+            <div class="pt-3 pb-9">
+              <Button class="w-full mt-5 h-11" :disabled="false"
+                >Sign up</Button
+              >
+            </div>
           </form>
         </div>
       </div>

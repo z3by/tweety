@@ -7,14 +7,8 @@
 <script setup lang="ts">
 import { computed, defineProps } from "vue";
 
-enum ButtonType {
-  primary = "primary",
-  text = "text",
-  secondary = "secondary",
-}
-
 interface Props {
-  type?: ButtonType;
+  type?: "primary" | "text" | "secondary";
   disabled?: boolean;
 }
 const props = defineProps<Props>();
