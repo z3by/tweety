@@ -9,9 +9,6 @@ on: [pull_request]
 jobs:
   nox:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./backend/python_django
 
     steps:
       - uses: actions/checkout@v2
